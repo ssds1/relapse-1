@@ -7,127 +7,237 @@
 <title>Relapse (dev)</title>
 <style>
 :root {
-  --text-color-primary: #fff;
-  --text-color-secondary: #ccc;
-  --text-color-tertiary: #999;
-  --background-color-primary: #0c0c0f;
-  --surface-color-primary: #202125;
-  --surface-color-secondary: #15161a;
-  --surface-color-hover: #a2a2a6;
-  --text-color-primary-hover: #202020;
-  --text-color-secondary-hover: #444;
+  --bg-deep: #060913;
+  --bg-radial: #0f172a;
+  --glass-surface: rgba(15, 23, 42, 0.65);
+  --glass-border: rgba(56, 189, 248, 0.25);
+  --accent-primary: #38bdf8;
+  --accent-glow: rgba(56, 189, 248, 0.45);
+  --accent-secondary: #818cf8;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --text-dim: #64748b;
   font-size: 17px;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 body {
   user-select: none;
   -webkit-user-select: none;
-  background-color: var(--background-color-primary);
-  color: var(--text-color-primary);
-  font-family: Arial, sans-serif;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  background-color: var(--bg-deep);
+  background-image: 
+    radial-gradient(circle at 50% 0%, rgba(56, 189, 248, 0.14) 0%, transparent 55%),
+    radial-gradient(circle at 85% 90%, rgba(129, 140, 248, 0.1) 0%, transparent 45%),
+    linear-gradient(180deg, var(--bg-radial) 0%, var(--bg-deep) 100%);
+  color: var(--text-main);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
   height: 100vh;
   padding: 0;
   margin: 0;
   overflow: hidden;
-  box-sizing: border-box;
+  position: relative;
 }
 
-a { color: var(--text-color-secondary); }
-a:active, a:focus { outline: 0; border: none; }
+/* خلفية شبكية خفيفة جداً لإعطاء عمق بصري */
+body::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 0;
+}
 
-.btn {
-  padding: 1rem 2rem;
-  text-align: center;
+a {
+  color: var(--text-main);
   text-decoration: none;
+}
+
+a:active, a:focus {
+  outline: 0;
+}
+
+/* الهيدر العلوي */
+.p-2 {
+  padding: 2.2rem 1rem 0.5rem !important;
+  z-index: 2;
+  width: 100%;
+  text-align: center;
+}
+
+h1.text-center {
+  margin: 0;
+  font-size: 2.1rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  background: linear-gradient(135deg, #ffffff 30%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 4px 25px rgba(56, 189, 248, 0.25);
+}
+
+#top-bar-text {
+  margin: 0.75rem auto 0;
   display: inline-block;
-  margin: .2rem;
-  cursor: pointer;
-  line-height: 2.5rem;
-  min-width: 5rem;
-  border-radius: 1.25rem;
-  width: 50%;
-  background-color: var(--surface-color-primary);
-  border: none;
-  color: var(--text-color-primary);
-  font-size: 1.3rem;
-  transition: background-color .25s ease;
-  box-sizing: border-box;
+  padding: 0.35rem 1.1rem;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid var(--glass-border);
+  border-radius: 999px;
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-.btn:hover, .btn:focus {
-  background-color: var(--surface-color-hover);
-  color: var(--text-color-primary-hover);
+#current-fw {
+  color: var(--accent-primary);
+  font-weight: 800;
+  letter-spacing: 0.5px;
 }
 
-.btn-secondary { padding: .5rem 2rem; font-size: 1rem; }
+/* منطقة الأزرار الرئيسية */
+#main-content {
+  position: relative;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+}
 
-#main-content { position: relative; box-sizing: border-box; }
 #main-content > div {
   position: absolute;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
   opacity: 0;
   pointer-events: none;
-  transition: opacity .3s ease-in-out;
-  box-sizing: border-box;
+  transition: opacity 0.3s ease-in-out;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 #pre-jb-view {
-  display: block !important;
-  padding-top: 18vh;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  max-width: 440px;
+  padding: 2rem 1.5rem;
+  background: var(--glass-surface);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(56, 189, 248, 0.35);
+  border-radius: 24px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(56, 189, 248, 0.08);
+  gap: 0.9rem;
+}
+
+.btn {
+  padding: 0.95rem 2rem;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 14px;
+  width: 100%;
+  background: linear-gradient(135deg, #0284c7 0%, #2563eb 100%);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  font-size: 1.25rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 8px 20px rgba(2, 132, 199, 0.35);
+  transition: all 0.22s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-#pre-jb-view .btn {
-  display: block;
-  width: 70%;
-  max-width: none;
-  margin: .5rem auto;
+.btn:hover, .btn:focus {
+  transform: translateY(-2px) scale(1.02);
+  background: linear-gradient(135deg, #38bdf8 0%, #3b82f6 100%);
+  color: #060913;
+  box-shadow: 0 0 28px var(--accent-glow), 0 10px 25px rgba(0, 0, 0, 0.5);
+  border-color: #ffffff;
 }
 
-.selected { opacity: 1 !important; pointer-events: auto !important; }
-.position-relative { position: relative; }
+.btn-secondary {
+  padding: 0.75rem 1.8rem;
+  font-size: 1rem;
+  font-weight: 600;
+  background: rgba(30, 41, 59, 0.75);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  color: var(--text-main);
+  box-shadow: none;
+}
+
+.btn-secondary:hover, .btn-secondary:focus {
+  background: rgba(248, 250, 252, 0.95);
+  color: #0f172a;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+}
+
+.selected {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
 .text-center { text-align: center; }
 .fw-bold { font-weight: 800; }
-.text-secondary {
-  color: var(--text-color-secondary);
-  margin: 0;
-  padding: 0;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: .8rem;
+
+/* قسم الحقوق في الأسفل */
+#credits {
+  position: fixed;
+  bottom: 14px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 0 16px;
+  pointer-events: none;
+  z-index: 2;
 }
-.p-2 { padding: .5rem !important; }
-.mt-2 { margin-top: .5rem !important; }
-.mb-2 { margin-bottom: .5rem !important; }
-  /* ---- creds & greetz, lifted verbatim from the poop2jb landing ---- */
-/* Credits, in slopkit2's style: a muted label over a single wrapped line of names.
-   position:fixed so it pins to the bottom without joining the centred flex column
-   (body is height:100vh;overflow:hidden - an in-flow footer would push the buttons). */
-#credits{
-    position:fixed; bottom:14px; left:0; right:0;
-    text-align:center; padding:0 16px; pointer-events:none;
+
+#credits span {
+  display: block;
+  color: var(--accent-primary);
+  opacity: 0.75;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 5px;
 }
-#credits span{ display:block; color:#6f7076; font-size:0.8rem; font-weight:700;
-               letter-spacing:.22em; margin-bottom:5px; }
-/* 26 names wrap to ~3 lines; cap the width so they break evenly rather than
-   spanning the full screen, and keep the whole block clear of the buttons. */
-#credits h3{ margin:0 auto; max-width:60rem; font-size:0.82rem; font-weight:700;
-             color:#4a4b50; line-height:1.55; }
-#basedon{ margin:9px 0 0; font-size:0.68rem; color:#3d3e43; letter-spacing:.05em;
-           font-weight:400; }
+
+#credits h3 {
+  margin: 0 auto;
+  max-width: 58rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  line-height: 1.5;
+}
+
+#basedon {
+  margin: 7px 0 0;
+  font-size: 0.68rem;
+  color: #475569;
+  letter-spacing: 0.06em;
+  font-weight: 500;
+}
 </style>
 </head>
 <body>
   <div class="p-2">
     <h1 class="text-center">Relapse dev (7.00 - 13.60)</h1>
-	<p class="text-center" id="top-bar-text">Current Firmware: <span class="fw-bold" id="current-fw">Unknown</span></p>
+    <p class="text-center" id="top-bar-text">Current Firmware: <span class="fw-bold" id="current-fw">Unknown</span></p>
   </div>
 
   <div id="main-content">
@@ -149,7 +259,7 @@ a:active, a:focus { outline: 0; border: none; }
     </h3>
     <p id="basedon">based on the Ralapse by j0rdy & soniciso1</p>
   </div>
-    <script>
+  <script>
     try {
       var firmwareMatch = /PlayStation 5\/(\d+\.\d+)/.exec(navigator.userAgent);
       var firmware = firmwareMatch ? firmwareMatch[1] : "";
