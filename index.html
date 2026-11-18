@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<title>Relapse</title>
+<title>Relapse - Payloads Manager</title>
 <style>
 :root {
   --text-color-primary: #fff;
@@ -13,9 +13,8 @@
   --background-color-primary: #0c0c0f;
   --surface-color-primary: #202125;
   --surface-color-secondary: #15161a;
-  --surface-color-hover: #a2a2a6;
-  --text-color-primary-hover: #202020;
-  --text-color-secondary-hover: #444;
+  --surface-color-hover: #00a8ff;
+  --text-color-primary-hover: #fff;
   font-size: 17px;
 }
 
@@ -34,13 +33,12 @@ body {
   box-sizing: border-box;
 }
 
-a { color: var(--text-color-secondary); }
+a { color: var(--text-color-secondary); text-decoration: none; }
 a:active, a:focus { outline: 0; border: none; }
 
 .btn {
   padding: 1rem 2rem;
   text-align: center;
-  text-decoration: none;
   display: inline-block;
   margin: .2rem;
   cursor: pointer;
@@ -63,7 +61,7 @@ a:active, a:focus { outline: 0; border: none; }
 
 .btn-secondary { padding: .5rem 2rem; font-size: 1rem; }
 
-#main-content { position: relative; box-sizing: border-box; }
+#main-content { position: relative; box-sizing: border-box; overflow-y: auto; }
 #main-content > div {
   position: absolute;
   top: 0;
@@ -75,65 +73,132 @@ a:active, a:focus { outline: 0; border: none; }
   transition: opacity .3s ease-in-out;
   box-sizing: border-box;
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #pre-jb-view {
-  display: block !important;
-  padding-top: 18vh;
+  display: flex !important;
+  padding-top: 15vh;
   text-align: center;
 }
 
 #pre-jb-view .btn {
   display: block;
   width: 70%;
-  max-width: none;
+  max-width: 400px;
   margin: .5rem auto;
 }
 
+/* شبكة البايلودات الاحترافية */
+#payloads-view {
+  padding: 20px;
+  align-items: center;
+}
+
+.payloads-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  width: 90%;
+  max-width: 950px;
+  margin-bottom: 20px;
+}
+
+.payload-card {
+  background: var(--surface-color-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 15px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.payload-card:hover, .payload-card.active {
+  background: rgba(0, 168, 255, 0.2);
+  border-color: #00a8ff;
+  transform: translateY(-2px);
+}
+
+.payload-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #00ffcc;
+  margin-bottom: 5px;
+}
+
+.payload-desc {
+  font-size: 0.75rem;
+  color: var(--text-color-secondary);
+  line-height: 1.3;
+}
+
+#console {
+  width: 90%;
+  max-width: 950px;
+  height: 90px;
+  background: rgba(10, 15, 25, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.8rem;
+  color: #00ffcc;
+  overflow-y: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  margin-top: 10px;
+}
+
 .selected { opacity: 1 !important; pointer-events: auto !important; }
-.position-relative { position: relative; }
 .text-center { text-align: center; }
 .fw-bold { font-weight: 800; }
-.text-secondary {
-  color: var(--text-color-secondary);
-  margin: 0;
-  padding: 0;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  font-size: .8rem;
-}
 .p-2 { padding: .5rem !important; }
-.mt-2 { margin-top: .5rem !important; }
-.mb-2 { margin-bottom: .5rem !important; }
-  /* ---- creds & greetz, lifted verbatim from the poop2jb landing ---- */
-/* Credits, in slopkit2's style: a muted label over a single wrapped line of names.
-   position:fixed so it pins to the bottom without joining the centred flex column
-   (body is height:100vh;overflow:hidden - an in-flow footer would push the buttons). */
+
 #credits{
-    position:fixed; bottom:14px; left:0; right:0;
-    text-align:center; padding:0 16px; pointer-events:none;
+    position: fixed; bottom: 10px; left: 0; right: 0;
+    text-align: center; padding: 0 16px; pointer-events: none;
 }
-#credits span{ display:block; color:#6f7076; font-size:0.8rem; font-weight:700;
-               letter-spacing:.22em; margin-bottom:5px; }
-/* 26 names wrap to ~3 lines; cap the width so they break evenly rather than
-   spanning the full screen, and keep the whole block clear of the buttons. */
-#credits h3{ margin:0 auto; max-width:60rem; font-size:0.82rem; font-weight:700;
-             color:#4a4b50; line-height:1.55; }
-#basedon{ margin:9px 0 0; font-size:0.68rem; color:#3d3e43; letter-spacing:.05em;
-           font-weight:400; }
+#credits span{ display: block; color: #6f7076; font-size: 0.75rem; font-weight: 700; letter-spacing: .22em; margin-bottom: 3px; }
+#credits h3{ margin: 0 auto; max-width: 60rem; font-size: 0.75rem; font-weight: 700; color: #4a4b50; line-height: 1.4; }
+#basedon{ margin: 5px 0 0; font-size: 0.65rem; color: #3d3e43; }
 </style>
 </head>
 <body>
   <div class="p-2">
-    <h1 class="text-center">Relapse (7.00 - 13.60)</h1>
-	<p class="text-center" id="top-bar-text">Current Firmware: <span class="fw-bold" id="current-fw">Unknown</span></p>
+    <h1 class="text-center" style="font-size: 1.8rem; margin: 5px 0;">Relapse (7.00 - 13.60)</h1>
+    <p class="text-center" id="top-bar-text" style="margin: 0;">Current Firmware: <span class="fw-bold" id="current-fw">Unknown</span></p>
   </div>
 
   <div id="main-content">
+    <!-- الشاشة الرئيسية -->
     <div id="pre-jb-view" class="selected">
       <a tabindex="0" class="btn fw-bold" id="run-jb" href="relapse.html">Jailbreak</a>
-      <a tabindex="0" class="btn btn-secondary" id="run-sender" href="relapse.html?senderok=1">Payloads (sender)</a>
+      <button tabindex="0" class="btn btn-secondary" id="show-sender" onclick="switchView('payloads-view')">Payloads (sender)</button>
+    </div>
+
+    <!-- واجهة قائمة البايلودات الخاصة بك -->
+    <div id="payloads-view">
+      <div class="payloads-grid">
+        <div class="payload-card active" id="card-0" onclick="selectPayload(0, './payloads/OnionHEN.elf')">
+          <div class="payload-title">OnionHEN.elf</div>
+          <div class="payload-desc">Toolbox and enabler for jailbroken PS5.</div>
+        </div>
+
+        <div class="payload-card" id="card-1" onclick="selectPayload(1, './payloads/elfldr-ps5-1360.elf')">
+          <div class="payload-title">elfldr-ps5-1360.elf</div>
+          <div class="payload-desc">ELF loader for firmware 13.60.</div>
+        </div>
+
+        <div class="payload-card" id="card-2" onclick="selectPayload(2, './payloads/kexp_2026_05_25.bin')">
+          <div class="payload-title">kexp_2026_05_25.bin</div>
+          <div class="payload-desc">Kernel exploit payload binary.</div>
+        </div>
+      </div>
+
+      <div id="console">Ready. Press R2 on controller to launch selected payload, or click Back to return.</div>
+      <button class="btn btn-secondary" style="width: 200px; margin-top: 10px;" onclick="switchView('pre-jb-view')">Back</button>
     </div>
   </div>
 
@@ -145,17 +210,91 @@ a:active, a:focus { outline: 0; border: none; }
         StonedModder, VoidWhisper, EchoStretch, BestPig, AlAzif, drakmor,
         hzhreal, hammer-83, ntfargo, shahrilnet, Znullptr,
         LM, ItsJokerZz, Soniciso1
-        cblock, BeLegal, Lord Caio Barros
     </h3>
-    <p id="basedon">based on the Ralapse by j0rdy & soniciso1</p>
+    <p id="basedon">based on the Relapse by j0rdy & soniciso1</p>
   </div>
-    <script>
+
+  <script>
     try {
       var firmwareMatch = /PlayStation 5\/(\d+\.\d+)/.exec(navigator.userAgent);
       var firmware = firmwareMatch ? firmwareMatch[1] : "";
       document.getElementById("current-fw").textContent = firmware || "Not detected";
     } catch (e) { }
+
     try { document.getElementById("run-jb").focus(); } catch (e) { }
+
+    function switchView(viewId) {
+      document.querySelectorAll('#main-content > div').forEach(el => el.classList.remove('selected'));
+      document.getElementById(viewId).classList.add('selected');
+    }
+
+    let selectedIndex = 0;
+    const payloads = [
+      "./payloads/OnionHEN.elf",
+      "./payloads/elfldr-ps5-1360.elf",
+      "./payloads/kexp_2026_05_25.bin"
+    ];
+
+    function selectPayload(index, filePath) {
+      selectedIndex = index;
+      document.querySelectorAll('.payload-card').forEach((card, idx) => {
+        if(idx === index) card.classList.add('active');
+        else card.classList.remove('active');
+      });
+      loadPayload(filePath);
+    }
+
+    function writeLog(message, type = "log") {
+      const output = document.getElementById("console");
+      let marker = "*";
+      if (type === "error") marker = "-";
+      if (type === "success") marker = "+";
+      output.textContent += `\n[${marker}] ${message}`;
+      output.scrollTop = output.scrollHeight;
+    }
+
+    async function loadPayload(filePath) {
+      try {
+        writeLog("Fetching: " + filePath, "info");
+        const response = await fetch(filePath);
+        if (!response.ok) throw new Error("الملف غير موجود في المستودع: " + filePath);
+        
+        const payloadData = await response.arrayBuffer();
+        writeLog("Sending to elfldr (port 9021)...", "info");
+
+        await fetch("http://127.0.0.1:9021", {
+          method: "POST",
+          body: payloadData,
+          mode: "no-cors"
+        });
+
+        writeLog("Payload sent successfully!", "success");
+      } catch (err) {
+        writeLog("Error: " + err.message, "error");
+      }
+    }
+
+    // تفعيل زر R2 لتشغيل البايلود المحدد
+    window.addEventListener("gamepadconnected", () => {
+      writeLog("Controller connected. Press R2 to execute selected payload.", "info");
+    });
+
+    setInterval(() => {
+      const gamepads = navigator.getGamepads();
+      if (!gamepads) return;
+      for (let gp of gamepads) {
+        if (gp) {
+          if (gp.buttons[7] && gp.buttons[7].pressed) {
+            if (!window.r2Pressed) {
+              window.r2Pressed = true;
+              writeLog("R2 pressed! Launching selected payload...", "info");
+              loadPayload(payloads[selectedIndex]);
+              setTimeout(() => { window.r2Pressed = false; }, 1000);
+            }
+          }
+        }
+      }
+    }, 100);
   </script>
 </body>
 </html>
