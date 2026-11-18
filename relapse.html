@@ -6,7 +6,31 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ps5</title>
 <style>
-  html, body { margin: 0; padding: 0; background: #0c0c0f; }
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=JetBrains+Mono:wght@500;700&display=swap');
+
+:root {
+  --bg-core: #030407;
+  --surface-glass: rgba(13, 17, 28, 0.85);
+  --border-glow: rgba(0, 243, 255, 0.35);
+  --neon-cyan: #00f3ff;
+  --neon-purple: #b000ff;
+  --text-main: #ffffff;
+  --text-muted: #8b9bb4;
+}
+
+  html, body { 
+    margin: 0; 
+    padding: 0; 
+    background-color: var(--bg-core);
+    background-image: 
+      radial-gradient(circle at 50% -20%, rgba(0, 243, 255, 0.18) 0%, transparent 60%),
+      radial-gradient(circle at 50% 120%, rgba(176, 0, 255, 0.15) 0%, transparent 60%),
+      linear-gradient(180deg, #070913 0%, #030407 100%);
+    color: var(--text-main);
+    font-family: 'Outfit', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+  }
 
   /* The log is shown by default so the console screen is readable (you cannot
      add a query flag when the User Guide redirects straight in). Pass ?log=0 to
@@ -16,14 +40,15 @@
       display: block;
       box-sizing: border-box;
       min-height: 100vh;
-      padding: 10px 12px;
-      color: #dfe3ee;
-      font: 12px/1.45 ui-monospace, Consolas, monospace;
+      padding: 20px 24px;
+      color: var(--neon-cyan);
+      font: 13px/1.6 'JetBrains Mono', Consolas, monospace;
       white-space: pre-wrap;
       word-break: break-all;
       overflow-y: auto;
+      background: var(--bg-core);
   }
-  #console div { padding: 1px 0; }
+  #console div { padding: 2px 0; }
   .LOG-DEBUG { color: #6f7480; }
   .LOG-INFO { color: #b9c2ff; }
   .LOG-LOG { color: #dfe3ee; }
@@ -203,159 +228,178 @@ function buildPayloadMenu() {
     const style = document.createElement("style");
     style.textContent = `
       #relapse-payload-menu {
-        box-sizing:border-box;
-        width:100%;
-        min-height:100vh;
-        padding:18px 16px 28px;
-        background:#0c0c0f;
-        color:#fff;
-        font:16px/1.45 Arial,sans-serif;
-        overflow-y:auto;
-        overflow-x:hidden;
+        box-sizing: border-box;
+        width: 100%;
+        min-height: 100vh;
+        padding: 24px 20px 36px;
+        background-color: var(--bg-core);
+        background-image: 
+          radial-gradient(circle at 50% -20%, rgba(0, 243, 255, 0.18) 0%, transparent 60%),
+          radial-gradient(circle at 50% 120%, rgba(176, 0, 255, 0.15) 0%, transparent 60%),
+          linear-gradient(180deg, #070913 0%, #030407 100%);
+        color: #fff;
+        font-family: 'Outfit', sans-serif;
+        overflow-y: auto;
+        overflow-x: hidden;
       }
       #relapse-payload-menu .payload-header {
-        position:relative;
-        text-align:center;
-        max-width:1100px;
-        margin:0 auto 14px;
+        position: relative;
+        text-align: center;
+        max-width: 1100px;
+        margin: 0 auto 24px;
+        padding-top: 10px;
       }
       #relapse-payload-menu h2 {
-        margin:0 0 3px;
-        font-size:22px;
-        line-height:1.25;
-        color:#fff !important;
-        -webkit-text-fill-color:#fff !important;
+        margin: 0 0 6px;
+        font-size: 2.2rem;
+        font-weight: 900;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        background: linear-gradient(135deg, #ffffff 40%, var(--neon-cyan) 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 0 20px rgba(0, 243, 255, 0.35));
       }
       #relapse-payload-menu .payload-status {
-        margin:0;
-        color:#ccc !important;
-        -webkit-text-fill-color:#ccc !important;
-        font-size:13px;
+        margin: 0;
+        color: var(--neon-cyan) !important;
+        -webkit-text-fill-color: var(--neon-cyan) !important;
+        font-size: 0.95rem;
+        font-family: 'JetBrains Mono', monospace;
       }
       #relapse-payload-menu .payload-help {
-        margin:3px 0 0;
-        color:#999 !important;
-        -webkit-text-fill-color:#999 !important;
-        font-size:12px;
+        margin: 6px 0 0;
+        color: #8b9bb4 !important;
+        -webkit-text-fill-color: #8b9bb4 !important;
+        font-size: 0.85rem;
       }
       #relapse-payload-menu .payload-grid {
-        display:grid !important;
-        grid-template-columns:repeat(3,minmax(0,1fr));
-        gap:1rem 2.5rem;
-        width:100%;
-        max-width:1600px;
-        margin:0 auto;
-        padding:0 2rem 2rem;
-        box-sizing:border-box;
-        align-content:start;
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1.2rem 2rem;
+        width: 100%;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 1rem 2rem;
+        box-sizing: border-box;
+        align-content: start;
       }
       #relapse-payload-menu .payload-tile {
-        display:block !important;
-        box-sizing:border-box;
-        width:100%;
-        min-height:104px;
-        padding:1rem 2rem;
-        border:0;
-        border-radius:1.25rem;
-        background:#202125 !important;
-        color:#fff !important;
-        -webkit-text-fill-color:#fff !important;
-        text-decoration:none;
-        text-align:center;
-        cursor:pointer;
-        line-height:1.3;
-        transition:background-color .25s ease;
+        display: block !important;
+        box-sizing: border-box;
+        width: 100%;
+        min-height: 118px;
+        padding: 1.2rem 1.5rem;
+        border: 1px solid rgba(0, 243, 255, 0.25);
+        border-radius: 16px;
+        background: var(--surface-glass) !important;
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        color: #fff !important;
+        -webkit-text-fill-color: #fff !important;
+        text-decoration: none;
+        text-align: center;
+        cursor: pointer;
+        line-height: 1.3;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        transition: all 0.25s cubic-bezier(0.25, 0.8, 0.25, 1);
       }
       #relapse-payload-menu .payload-tile:focus,
       #relapse-payload-menu .payload-tile:hover {
-        outline:0;
-        border:0;
-        background:#a2a2a6 !important;
-        color:#202020 !important;
-        -webkit-text-fill-color:#202020 !important;
+        outline: 0;
+        transform: translateY(-3px) scale(1.02);
+        background: linear-gradient(135deg, var(--neon-cyan) 0%, #0077ff 100%) !important;
+        color: #030407 !important;
+        -webkit-text-fill-color: #030407 !important;
+        box-shadow: 0 0 30px var(--neon-cyan), 0 12px 30px rgba(0, 0, 0, 0.6);
+        border-color: #ffffff;
       }
-      #relapse-payload-menu .payload-tile.sending { opacity:.55; }
+      #relapse-payload-menu .payload-tile.sending { opacity: .55; }
       #relapse-payload-menu .payload-tile.sent {
-        background:#202125 !important;
+        background: var(--surface-glass) !important;
       }
       #relapse-payload-menu .payload-tile.failed {
-        background:#202125 !important;
+        background: var(--surface-glass) !important;
       }
       #relapse-payload-menu .payload-tile {
-        display:flex !important;
-        flex-direction:column !important;
-        justify-content:center !important;
-        align-items:stretch !important;
-        min-height:118px !important;
-        overflow:visible !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: stretch !important;
+        overflow: visible !important;
       }
 
       #relapse-payload-menu .payload-line {
-        display:block !important;
-        visibility:visible !important;
-        opacity:1 !important;
-        position:relative !important;
-        width:100% !important;
-        height:auto !important;
-        max-height:none !important;
-        min-height:0 !important;
-        margin:0 !important;
-        padding:0 !important;
-        overflow:visible !important;
-        box-sizing:border-box !important;
-        text-align:center !important;
-        white-space:normal !important;
-        text-overflow:clip !important;
-        text-decoration:none !important;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: relative !important;
+        width: 100% !important;
+        height: auto !important;
+        max-height: none !important;
+        min-height: 0 !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        overflow: visible !important;
+        box-sizing: border-box !important;
+        text-align: center !important;
+        white-space: normal !important;
+        text-overflow: clip !important;
+        text-decoration: none !important;
       }
 
       #relapse-payload-menu .payload-title {
-        color:#fff !important;
-        -webkit-text-fill-color:#fff !important;
-        font-size:1.3rem !important;
-        line-height:1.55rem !important;
-        font-weight:800 !important;
+        color: #fff !important;
+        -webkit-text-fill-color: #fff !important;
+        font-size: 1.25rem !important;
+        line-height: 1.5rem !important;
+        font-weight: 800 !important;
       }
 
       #relapse-payload-menu .payload-description {
-        color:#ccc !important;
-        -webkit-text-fill-color:#ccc !important;
-        font-size:1rem !important;
-        line-height:1.45rem !important;
-        font-weight:400 !important;
+        color: #cbd5e1 !important;
+        -webkit-text-fill-color: #cbd5e1 !important;
+        font-size: 0.95rem !important;
+        line-height: 1.35rem !important;
+        font-weight: 400 !important;
+        margin-top: 4px !important;
       }
 
       #relapse-payload-menu .payload-info {
-        color:#999 !important;
-        -webkit-text-fill-color:#999 !important;
-        font-size:.9rem !important;
-        line-height:1.35rem !important;
-        font-weight:400 !important;
+        color: #94a3b8 !important;
+        -webkit-text-fill-color: #94a3b8 !important;
+        font-size: 0.82rem !important;
+        line-height: 1.2rem !important;
+        font-weight: 400 !important;
+        margin-top: 2px !important;
       }
 
       #relapse-payload-menu .payload-tile:hover .payload-title,
       #relapse-payload-menu .payload-tile:focus .payload-title,
       #relapse-payload-menu .payload-tile:active .payload-title {
-        color:#202020 !important;
-        -webkit-text-fill-color:#202020 !important;
+        color: #030407 !important;
+        -webkit-text-fill-color: #030407 !important;
       }
 
       #relapse-payload-menu .payload-tile:hover .payload-description,
       #relapse-payload-menu .payload-tile:focus .payload-description,
       #relapse-payload-menu .payload-tile:active .payload-description {
-        color:#444 !important;
-        -webkit-text-fill-color:#444 !important;
+        color: #1e293b !important;
+        -webkit-text-fill-color: #1e293b !important;
       }
 
       #relapse-payload-menu .payload-tile:hover .payload-info,
       #relapse-payload-menu .payload-tile:focus .payload-info,
       #relapse-payload-menu .payload-tile:active .payload-info {
-        color:#555 !important;
-        -webkit-text-fill-color:#555 !important;
+        color: #334155 !important;
+        -webkit-text-fill-color: #334155 !important;
       }
 
-      @media (max-width:700px) {
-        #relapse-payload-menu .payload-grid { grid-template-columns:1fr; }
+      @media (max-width: 900px) {
+        #relapse-payload-menu .payload-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+      @media (max-width: 600px) {
+        #relapse-payload-menu .payload-grid { grid-template-columns: 1fr; }
       }
     `;
     document.head.appendChild(style);
@@ -389,7 +433,6 @@ function buildPayloadMenu() {
         a.href = "#";
         a.className = "payload-tile";
         a.tabIndex = 0;
-        a.style.setProperty("background-color", "#202125", "important");
         a.style.setProperty("color", "#fff", "important");
         a.style.setProperty("-webkit-text-fill-color", "#fff", "important");
 
@@ -419,49 +462,47 @@ function buildPayloadMenu() {
         }
         name.style.setProperty("color", "#fff", "important");
         name.style.setProperty("-webkit-text-fill-color", "#fff", "important");
-        description.style.setProperty("color", "#ccc", "important");
-        description.style.setProperty("-webkit-text-fill-color", "#ccc", "important");
-        info.style.setProperty("color", "#999", "important");
-        info.style.setProperty("-webkit-text-fill-color", "#999", "important");
+        description.style.setProperty("color", "#cbd5e1", "important");
+        description.style.setProperty("-webkit-text-fill-color", "#cbd5e1", "important");
+        info.style.setProperty("color", "#94a3b8", "important");
+        info.style.setProperty("-webkit-text-fill-color", "#94a3b8", "important");
 
         a.addEventListener("focus", () => {
-            a.style.setProperty("background-color", "#a2a2a6", "important");
-            a.style.setProperty("color", "#202020", "important");
-            a.style.setProperty("-webkit-text-fill-color", "#202020", "important");
-            name.style.setProperty("color", "#202020", "important");
-            name.style.setProperty("-webkit-text-fill-color", "#202020", "important");
-            description.style.setProperty("color", "#444", "important");
-            description.style.setProperty("-webkit-text-fill-color", "#444", "important");
-            info.style.setProperty("color", "#555", "important");
-            info.style.setProperty("-webkit-text-fill-color", "#555", "important");
+            a.style.setProperty("color", "#030407", "important");
+            a.style.setProperty("-webkit-text-fill-color", "#030407", "important");
+            name.style.setProperty("color", "#030407", "important");
+            name.style.setProperty("-webkit-text-fill-color", "#030407", "important");
+            description.style.setProperty("color", "#1e293b", "important");
+            description.style.setProperty("-webkit-text-fill-color", "#1e293b", "important");
+            info.style.setProperty("color", "#334155", "important");
+            info.style.setProperty("-webkit-text-fill-color", "#334155", "important");
         });
         a.addEventListener("blur", () => {
-            a.style.setProperty("background-color", "#202125", "important");
             a.style.setProperty("color", "#fff", "important");
             a.style.setProperty("-webkit-text-fill-color", "#fff", "important");
             name.style.setProperty("color", "#fff", "important");
             name.style.setProperty("-webkit-text-fill-color", "#fff", "important");
-            description.style.setProperty("color", "#ccc", "important");
-            description.style.setProperty("-webkit-text-fill-color", "#ccc", "important");
-            info.style.setProperty("color", "#999", "important");
-            info.style.setProperty("-webkit-text-fill-color", "#999", "important");
+            description.style.setProperty("color", "#cbd5e1", "important");
+            description.style.setProperty("-webkit-text-fill-color", "#cbd5e1", "important");
+            info.style.setProperty("color", "#94a3b8", "important");
+            info.style.setProperty("-webkit-text-fill-color", "#94a3b8", "important");
         });
 
         a.append(name, description, info);
 
         a.addEventListener("click", async (e) => {
             e.preventDefault();
-            a.classList.remove("sent", "failed");
+            a.classList.remove("sent", "file-failed");
             a.classList.add("sending");
             print(t.title + ": sending ...", "LOG-INFO");
             try {
                 const n = await window.__sendPayload(t.name);
-                a.classList.remove("sending", "failed");
+                a.classList.remove("sending", "file-failed");
                 a.classList.add("sent");
                 print(t.title + ": sent " + n + " bytes to 127.0.0.1:9021", "LOG-SUCCESS");
             } catch (err) {
                 a.classList.remove("sending", "sent");
-                a.classList.add("failed");
+                a.classList.add("file-failed");
                 print(t.title + ": " + ((err && err.message) || err), "LOG-ERROR");
             }
         });
