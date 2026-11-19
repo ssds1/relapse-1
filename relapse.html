@@ -6,7 +6,13 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ps5</title>
 <style>
-  html, body { margin: 0; padding: 0; background: #0c0c0f; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    background-color: #060912;
+    background-image: radial-gradient(circle at 50% 0%, rgba(0, 210, 255, 0.14), transparent 55%);
+    color: #dfe3ee;
+  }
 
   /* The log is shown by default so the console screen is readable (you cannot
      add a query flag when the User Guide redirects straight in). Pass ?log=0 to
@@ -16,16 +22,16 @@
       display: block;
       box-sizing: border-box;
       min-height: 100vh;
-      padding: 10px 12px;
+      padding: 14px 16px;
       color: #dfe3ee;
-      font: 12px/1.45 ui-monospace, Consolas, monospace;
+      font: 12px/1.5 ui-monospace, Consolas, monospace;
       white-space: pre-wrap;
       word-break: break-all;
       overflow-y: auto;
   }
   #console div { padding: 1px 0; }
   .LOG-DEBUG { color: #6f7480; }
-  .LOG-INFO { color: #b9c2ff; }
+  .LOG-INFO { color: #7dd3fc; }
   .LOG-LOG { color: #dfe3ee; }
   .LOG-WARN { color: #ffd27d; }
   .LOG-ERROR { color: #ff6b6b; }
@@ -206,9 +212,10 @@ function buildPayloadMenu() {
         box-sizing:border-box;
         width:100%;
         min-height:100vh;
-        padding:18px 16px 28px;
-        background:#0c0c0f;
-        color:#fff;
+        padding:22px 18px 34px;
+        background-color:#060912;
+        background-image:radial-gradient(circle at 50% 0%, rgba(0, 210, 255, 0.14), transparent 55%);
+        color:#f4f7fb;
         font:16px/1.45 Arial,sans-serif;
         overflow-y:auto;
         overflow-x:hidden;
@@ -217,35 +224,41 @@ function buildPayloadMenu() {
         position:relative;
         text-align:center;
         max-width:1100px;
-        margin:0 auto 14px;
+        margin:0 auto 18px;
       }
       #relapse-payload-menu h2 {
-        margin:0 0 3px;
-        font-size:22px;
+        margin:0 0 4px;
+        font-size:24px;
+        font-weight:800;
         line-height:1.25;
-        color:#fff !important;
-        -webkit-text-fill-color:#fff !important;
+        color:#f4f7fb !important;
+        -webkit-text-fill-color:#f4f7fb !important;
       }
       #relapse-payload-menu .payload-status {
         margin:0;
-        color:#ccc !important;
-        -webkit-text-fill-color:#ccc !important;
-        font-size:13px;
+        display:inline-block;
+        padding:3px 12px;
+        border-radius:999px;
+        background:#0d1322;
+        border:1px solid rgba(0, 210, 255, 0.35);
+        color:#38bdf8 !important;
+        -webkit-text-fill-color:#38bdf8 !important;
+        font-size:12px;
       }
       #relapse-payload-menu .payload-help {
-        margin:3px 0 0;
-        color:#999 !important;
-        -webkit-text-fill-color:#999 !important;
+        margin:6px 0 0;
+        color:#9aa7bd !important;
+        -webkit-text-fill-color:#9aa7bd !important;
         font-size:12px;
       }
       #relapse-payload-menu .payload-grid {
         display:grid !important;
         grid-template-columns:repeat(3,minmax(0,1fr));
-        gap:1rem 2.5rem;
+        gap:1rem 2rem;
         width:100%;
         max-width:1600px;
         margin:0 auto;
-        padding:0 2rem 2rem;
+        padding:0 1.5rem 2rem;
         box-sizing:border-box;
         align-content:start;
       }
@@ -254,32 +267,36 @@ function buildPayloadMenu() {
         box-sizing:border-box;
         width:100%;
         min-height:104px;
-        padding:1rem 2rem;
-        border:0;
-        border-radius:1.25rem;
-        background:#202125 !important;
+        padding:1rem 1.75rem;
+        border:1px solid rgba(255,255,255,0.09);
+        border-radius:1.1rem;
+        background:#0d1322 !important;
         color:#fff !important;
         -webkit-text-fill-color:#fff !important;
         text-decoration:none;
         text-align:center;
         cursor:pointer;
         line-height:1.3;
-        transition:background-color .25s ease;
+        box-shadow:0 10px 24px rgba(0,0,0,0.45);
+        transition:background-color .2s ease, border-color .2s ease, transform .2s ease;
       }
       #relapse-payload-menu .payload-tile:focus,
       #relapse-payload-menu .payload-tile:hover {
         outline:0;
-        border:0;
-        background:#a2a2a6 !important;
-        color:#202020 !important;
-        -webkit-text-fill-color:#202020 !important;
+        border:1px solid #38bdf8;
+        background:#38bdf8 !important;
+        color:#060912 !important;
+        -webkit-text-fill-color:#060912 !important;
+        transform:translateY(-2px);
       }
       #relapse-payload-menu .payload-tile.sending { opacity:.55; }
       #relapse-payload-menu .payload-tile.sent {
-        background:#202125 !important;
+        background:#0d1322 !important;
+        border-color:rgba(125, 255, 158, 0.45);
       }
       #relapse-payload-menu .payload-tile.failed {
-        background:#202125 !important;
+        background:#0d1322 !important;
+        border-color:rgba(255, 107, 107, 0.45);
       }
       #relapse-payload-menu .payload-tile {
         display:flex !important;
@@ -312,46 +329,48 @@ function buildPayloadMenu() {
       #relapse-payload-menu .payload-title {
         color:#fff !important;
         -webkit-text-fill-color:#fff !important;
-        font-size:1.3rem !important;
-        line-height:1.55rem !important;
+        font-size:1.25rem !important;
+        line-height:1.5rem !important;
         font-weight:800 !important;
       }
 
       #relapse-payload-menu .payload-description {
-        color:#ccc !important;
-        -webkit-text-fill-color:#ccc !important;
-        font-size:1rem !important;
-        line-height:1.45rem !important;
+        color:#cbd5e1 !important;
+        -webkit-text-fill-color:#cbd5e1 !important;
+        font-size:0.98rem !important;
+        line-height:1.4rem !important;
         font-weight:400 !important;
+        margin-top:3px !important;
       }
 
       #relapse-payload-menu .payload-info {
-        color:#999 !important;
-        -webkit-text-fill-color:#999 !important;
-        font-size:.9rem !important;
-        line-height:1.35rem !important;
+        color:#94a3b8 !important;
+        -webkit-text-fill-color:#94a3b8 !important;
+        font-size:.86rem !important;
+        line-height:1.3rem !important;
         font-weight:400 !important;
+        margin-top:2px !important;
       }
 
       #relapse-payload-menu .payload-tile:hover .payload-title,
       #relapse-payload-menu .payload-tile:focus .payload-title,
       #relapse-payload-menu .payload-tile:active .payload-title {
-        color:#202020 !important;
-        -webkit-text-fill-color:#202020 !important;
+        color:#060912 !important;
+        -webkit-text-fill-color:#060912 !important;
       }
 
       #relapse-payload-menu .payload-tile:hover .payload-description,
       #relapse-payload-menu .payload-tile:focus .payload-description,
       #relapse-payload-menu .payload-tile:active .payload-description {
-        color:#444 !important;
-        -webkit-text-fill-color:#444 !important;
+        color:#1e293b !important;
+        -webkit-text-fill-color:#1e293b !important;
       }
 
       #relapse-payload-menu .payload-tile:hover .payload-info,
       #relapse-payload-menu .payload-tile:focus .payload-info,
       #relapse-payload-menu .payload-tile:active .payload-info {
-        color:#555 !important;
-        -webkit-text-fill-color:#555 !important;
+        color:#334155 !important;
+        -webkit-text-fill-color:#334155 !important;
       }
 
       @media (max-width:700px) {
@@ -389,7 +408,7 @@ function buildPayloadMenu() {
         a.href = "#";
         a.className = "payload-tile";
         a.tabIndex = 0;
-        a.style.setProperty("background-color", "#202125", "important");
+        a.style.setProperty("background-color", "#0d1322", "important");
         a.style.setProperty("color", "#fff", "important");
         a.style.setProperty("-webkit-text-fill-color", "#fff", "important");
 
@@ -419,32 +438,32 @@ function buildPayloadMenu() {
         }
         name.style.setProperty("color", "#fff", "important");
         name.style.setProperty("-webkit-text-fill-color", "#fff", "important");
-        description.style.setProperty("color", "#ccc", "important");
-        description.style.setProperty("-webkit-text-fill-color", "#ccc", "important");
-        info.style.setProperty("color", "#999", "important");
-        info.style.setProperty("-webkit-text-fill-color", "#999", "important");
+        description.style.setProperty("color", "#cbd5e1", "important");
+        description.style.setProperty("-webkit-text-fill-color", "#cbd5e1", "important");
+        info.style.setProperty("color", "#94a3b8", "important");
+        info.style.setProperty("-webkit-text-fill-color", "#94a3b8", "important");
 
         a.addEventListener("focus", () => {
-            a.style.setProperty("background-color", "#a2a2a6", "important");
-            a.style.setProperty("color", "#202020", "important");
-            a.style.setProperty("-webkit-text-fill-color", "#202020", "important");
-            name.style.setProperty("color", "#202020", "important");
-            name.style.setProperty("-webkit-text-fill-color", "#202020", "important");
-            description.style.setProperty("color", "#444", "important");
-            description.style.setProperty("-webkit-text-fill-color", "#444", "important");
-            info.style.setProperty("color", "#555", "important");
-            info.style.setProperty("-webkit-text-fill-color", "#555", "important");
+            a.style.setProperty("background-color", "#38bdf8", "important");
+            a.style.setProperty("color", "#060912", "important");
+            a.style.setProperty("-webkit-text-fill-color", "#060912", "important");
+            name.style.setProperty("color", "#060912", "important");
+            name.style.setProperty("-webkit-text-fill-color", "#060912", "important");
+            description.style.setProperty("color", "#1e293b", "important");
+            description.style.setProperty("-webkit-text-fill-color", "#1e293b", "important");
+            info.style.setProperty("color", "#334155", "important");
+            info.style.setProperty("-webkit-text-fill-color", "#334155", "important");
         });
         a.addEventListener("blur", () => {
-            a.style.setProperty("background-color", "#202125", "important");
+            a.style.setProperty("background-color", "#0d1322", "important");
             a.style.setProperty("color", "#fff", "important");
             a.style.setProperty("-webkit-text-fill-color", "#fff", "important");
             name.style.setProperty("color", "#fff", "important");
             name.style.setProperty("-webkit-text-fill-color", "#fff", "important");
-            description.style.setProperty("color", "#ccc", "important");
-            description.style.setProperty("-webkit-text-fill-color", "#ccc", "important");
-            info.style.setProperty("color", "#999", "important");
-            info.style.setProperty("-webkit-text-fill-color", "#999", "important");
+            description.style.setProperty("color", "#cbd5e1", "important");
+            description.style.setProperty("-webkit-text-fill-color", "#cbd5e1", "important");
+            info.style.setProperty("color", "#94a3b8", "important");
+            info.style.setProperty("-webkit-text-fill-color", "#94a3b8", "important");
         });
 
         a.append(name, description, info);
