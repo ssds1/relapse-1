@@ -7,11 +7,11 @@
 <title>Relapse (dev)</title>
 <style>
 :root {
-  --hud-bg: #05070e;
-  --hud-panel: rgba(11, 16, 30, 0.92);
-  --hud-cyan: #00f0ff;
-  --hud-purple: #a855f7;
-  --hud-border: rgba(0, 240, 255, 0.35);
+  --hud-bg: #03050a;
+  --hud-card: rgba(8, 13, 26, 0.94);
+  --hud-cyan: #00f5d4;
+  --hud-blue: #00bbf9;
+  --hud-amber: #fee440;
   --hud-text: #f8fafc;
   --hud-muted: #94a3b8;
   font-size: 17px;
@@ -25,24 +25,24 @@ body {
   user-select: none;
   -webkit-user-select: none;
   margin: 0;
-  padding: 0;
+  padding: 18px 16px;
   min-height: 100vh;
   overflow: hidden;
   display: grid;
   grid-template-rows: auto 1fr auto;
+  gap: 14px;
   color: var(--hud-text);
   font-family: "Segoe UI", Arial, sans-serif;
   background-color: var(--hud-bg);
   background-image:
-    linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px),
-    radial-gradient(circle at 50% -10%, rgba(0, 240, 255, 0.2), transparent 55%),
-    radial-gradient(circle at 50% 110%, rgba(168, 85, 247, 0.14), transparent 55%);
-  background-size: 36px 36px, 36px 36px, 100% 100%, 100% 100%;
+    radial-gradient(circle at 50% -15%, rgba(0, 245, 255, 0.22), transparent 55%),
+    radial-gradient(circle at 50% 115%, rgba(0, 187, 249, 0.14), transparent 55%),
+    linear-gradient(rgba(0, 245, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 245, 255, 0.035) 1px, transparent 1px);
+  background-size: 100% 100%, 100% 100%, 28px 28px, 28px 28px;
 }
 
 a {
-  color: var(--hud-text);
   text-decoration: none;
 }
 
@@ -51,25 +51,160 @@ a:active, a:focus {
 }
 
 .p-2 {
-  padding: 1.5rem 1rem 0.5rem !important;
   text-align: center;
+  padding: 4px 8px 0 !important;
 }
 
 h1.text-center {
   margin: 0;
-  font-size: 2rem;
-  font-weight: 800;
-  letter-spacing: 1px;
+  font-size: 1.95rem;
+  font-weight: 900;
+  letter-spacing: 2px;
   text-transform: uppercase;
   color: var(--hud-text);
-  text-shadow: 0 0 18px rgba(0, 240, 255, 0.28);
+  text-shadow: 0 0 18px rgba(0, 245, 255, 0.35);
 }
 
 #top-bar-text {
   display: inline-block;
   margin: 0.65rem auto 0;
-  padding: 0.35rem 1rem;
-  border-radius: 6px;
-  background-color: var(--hud-panel);
-  border: 1px solid var(--hud-border);
-  border-left: 3px solid var(--hud-cyan);
+  padding: 0.35rem 1.15rem;
+  background-color: var(--hud-card);
+  border: 1px solid rgba(0, 245, 255, 0.4);
+  clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+  color: var(--hud-muted);
+  font-size: 0.86rem;
+  letter-spacing: 0.7px;
+}
+
+.fw-bold {
+  font-weight: 800;
+}
+
+#current-fw {
+  color: var(--hud-cyan);
+}
+
+.text-center {
+  text-align: center;
+}
+
+#main-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+}
+
+#main-content > div {
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease-in-out;
+}
+
+#pre-jb-view {
+  position: relative;
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 450px;
+  margin: 0 auto;
+  padding: 22px 20px;
+  background-color: var(--hud-card);
+  border: 1px solid rgba(0, 245, 255, 0.25);
+  box-shadow: 0 0 35px rgba(0, 0, 0, 0.7), inset 0 0 24px rgba(0, 245, 255, 0.05);
+}
+
+#pre-jb-view::before {
+  content: "HUD // v1.10";
+  position: absolute;
+  top: -10px;
+  left: 16px;
+  padding: 1px 8px;
+  background-color: var(--hud-bg);
+  border: 1px solid rgba(0, 245, 255, 0.45);
+  color: var(--hud-cyan);
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 1rem 1.8rem;
+  background-color: rgba(0, 245, 255, 0.08);
+  border: 1px solid var(--hud-cyan);
+  border-left: 5px solid var(--hud-cyan);
+  clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);
+  color: var(--hud-text);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.16s ease, color 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease;
+}
+
+.btn:hover, .btn:focus {
+  background-color: var(--hud-cyan);
+  color: #03050a;
+  box-shadow: 0 0 24px rgba(0, 245, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  padding: 0.85rem 1.6rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  background-color: rgba(254, 228, 64, 0.06);
+  border: 1px solid rgba(254, 228, 64, 0.55);
+  border-left: 5px solid var(--hud-amber);
+  color: var(--hud-muted);
+}
+
+.btn-secondary:hover, .btn-secondary:focus {
+  background-color: var(--hud-amber);
+  border-color: var(--hud-amber);
+  color: #03050a;
+  box-shadow: 0 0 22px rgba(254, 228, 64, 0.5);
+  transform: translateY(-1px);
+}
+
+.selected {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+#credits {
+  text-align: center;
+  padding: 0 14px 6px;
+  pointer-events: none;
+}
+
+#credits span {
+  display: block;
+  color: var(--hud-cyan);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+#credits h3 {
+  margin: 0 auto;
+  max-width: 60rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: #64748b;
+  line-height: 1.45;
+}
+
+#
