@@ -9,15 +9,14 @@
 :root {
   --bg-main: #07090f;
   --bg-card: #0e1320;
-  --bg-card-hover: #151d30;
+  --bg-card-hover: #172036;
   --accent: #00d2ff;
-  --accent-soft: rgba(0, 210, 255, 0.16);
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-accent: rgba(0, 210, 255, 0.45);
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-accent: rgba(0, 210, 255, 0.5);
   --text-primary: #f4f7fb;
   --text-secondary: #9aa7bd;
   --text-muted: #5e6b82;
-  font-size: 17px;
+  font-size: 16px;
 }
 
 * {
@@ -25,23 +24,25 @@
 }
 
 html, body {
-  height: 100%;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
-  overflow: hidden;
   user-select: none;
   -webkit-user-select: none;
   background-color: var(--bg-main);
   background-image:
-    radial-gradient(circle at 50% -10%, rgba(0, 210, 255, 0.16), transparent 55%),
+    radial-gradient(circle at 50% 0%, rgba(0, 210, 255, 0.18), transparent 55%),
     linear-gradient(180deg, #090d16 0%, #05070c 100%);
   color: var(--text-primary);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 body {
-  display: grid;
-  grid-template-rows: auto 1fr auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px 14px 20px;
+  gap: 16px;
 }
 
 a {
@@ -54,22 +55,22 @@ a:active, a:focus {
 }
 
 .p-2 {
-  padding: 2rem 1rem 0.5rem !important;
   text-align: center;
+  padding-top: 8px;
 }
 
 h1.text-center {
   margin: 0;
-  font-size: 2rem;
+  font-size: 1.85rem;
   font-weight: 800;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.5px;
   color: var(--text-primary);
 }
 
 #top-bar-text {
-  margin: 0.7rem auto 0;
+  margin: 10px auto 0;
   display: inline-block;
-  padding: 0.35rem 1rem;
+  padding: 6px 14px;
   border-radius: 999px;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
@@ -90,58 +91,108 @@ h1.text-center {
 }
 
 #main-content {
-  position: relative;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
+  margin: auto 0;
 }
 
 #main-content > div {
-  position: relative;
   width: 100%;
-  max-width: 440px;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s ease;
+  max-width: 430px;
 }
 
 #pre-jb-view {
   display: flex !important;
   flex-direction: column;
-  gap: 0.85rem;
-  padding: 1.6rem;
-  border-radius: 20px;
+  gap: 12px;
+  padding: 20px;
+  border-radius: 18px;
   background: var(--bg-card);
   border: 1px solid var(--border-subtle);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.5);
 }
 
 .btn {
   display: block;
   width: 100%;
-  padding: 1rem 1.5rem;
-  border-radius: 14px;
+  padding: 15px 20px;
+  border-radius: 12px;
   background: var(--bg-card-hover);
   border: 1px solid var(--border-accent);
   color: var(--text-primary);
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 700;
   text-align: center;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .btn:hover, .btn:focus {
   background: var(--accent);
   border-color: var(--accent);
   color: #05070c;
-  transform: translateY(-2px);
 }
 
 .btn-secondary {
-  padding: 0.8rem 1.4rem;
-  font-size: 1rem;
+  padding: 12px 18px;
+  font-size: 0.98rem;
   font-weight: 600;
-  background: rgba(255, 255, 255, 0.03);
-  border
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+}
+
+.btn-secondary:hover, .btn-secondary:focus {
+  background: #e6ecf5;
+  border-color: #e6ecf5;
+  color: #090d16;
+}
+
+.selected {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+}
+
+#credits {
+  text-align: center;
+  padding: 6px 8px 0;
+  pointer-events: none;
+}
+
+#credits span {
+  display: block;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+#credits h3 {
+  margin: 0 auto;
+  max-width: 60rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+#basedon {
+  margin: 6px 0 0;
+  font-size: 0.68rem;
+  color: #455066;
+}
+</style>
+</head>
+<body>
+  <div class="p-2">
+    <h1 class="text-center">Relapse dev (7.00 - 13.60)</h1>
+    <p class="text-center" id="top-bar-text">Current Firmware: <span class="fw-bold" id="current-fw">Unknown</span></p>
+  </div>
+
+  <div id="main-content">
+    <div id="pre-jb-view" class="selected">
+      <a tabindex="0" class="btn fw-bold" id="
