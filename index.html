@@ -7,12 +7,12 @@
 <title>Relapse (dev)</title>
 <style>
 :root {
-  --hud-bg: #03050a;
-  --hud-card: rgba(8, 13, 26, 0.94);
-  --hud-cyan: #00f5d4;
-  --hud-amber: #fee440;
-  --hud-text: #f8fafc;
-  --hud-muted: #94a3b8;
+  --bg: #04070d;
+  --panel: #0a101d;
+  --cyan: #00f0ff;
+  --amber: #ffb800;
+  --text: #f8fafc;
+  --muted: #94a3b8;
   font-size: 17px;
 }
 
@@ -20,185 +20,32 @@
   box-sizing: border-box;
 }
 
-html, body {
-  min-height: 100vh;
-  margin: 0;
-  padding: 0;
-  user-select: none;
-  -webkit-user-select: none;
-  color: var(--hud-text);
-  font-family: "Segoe UI", Arial, sans-serif;
-  background-color: var(--hud-bg);
-  background-image:
-    radial-gradient(circle at 50% -15%, rgba(0, 245, 255, 0.2), transparent 55%),
-    radial-gradient(circle at 50% 115%, rgba(0, 187, 249, 0.12), transparent 55%),
-    linear-gradient(rgba(0, 245, 255, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 245, 255, 0.035) 1px, transparent 1px);
-  background-size: 100% 100%, 100% 100%, 28px 28px, 28px 28px;
-}
-
 body {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 18px 16px;
-  gap: 16px;
-}
-
-a {
-  text-decoration: none;
-}
-
-a:active, a:focus {
-  outline: 0;
-}
-
-.p-2 {
-  text-align: center;
-  padding: 4px 8px 0 !important;
-}
-
-h1.text-center {
   margin: 0;
-  font-size: 1.95rem;
-  font-weight: 900;
-  letter-spacing: 1.5px;
-  text-transform: uppercase;
-  color: var(--hud-text);
-  text-shadow: 0 0 18px rgba(0, 245, 255, 0.3);
+  padding: 20px 14px;
+  min-height: 100vh;
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  text-align: center;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+h1 {
+  margin: 10px 0 8px;
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  color: var(--text);
 }
 
 #top-bar-text {
   display: inline-block;
-  margin: 0.65rem auto 0;
-  padding: 0.35rem 1.15rem;
+  margin: 0 0 28px;
+  padding: 6px 14px;
   border-radius: 6px;
-  background-color: var(--hud-card);
-  border: 1px solid rgba(0, 245, 255, 0.4);
-  border-top: 2px solid var(--hud-cyan);
-  color: var(--hud-muted);
-  font-size: 0.86rem;
-  letter-spacing: 0.6px;
-}
-
-.fw-bold {
-  font-weight: 800;
-}
-
-#current-fw {
-  color: var(--hud-cyan);
-}
-
-.text-center {
-  text-align: center;
-}
-
-#main-content {
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: auto 0;
-}
-
-#main-content > div {
-  width: 100%;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s ease-in-out;
-}
-
-#pre-jb-view {
-  position: relative;
-  display: flex !important;
-  flex-direction: column;
-  align-items: center;
-  gap: 14px;
-  width: 100%;
-  max-width: 450px;
-  margin: 0 auto;
-  padding: 24px 20px 20px;
-  border-radius: 10px;
-  background-color: var(--hud-card);
-  border: 1px solid rgba(0, 245, 255, 0.28);
-  box-shadow: 0 0 35px rgba(0, 0, 0, 0.7), inset 0 0 20px rgba(0, 245, 255, 0.05);
-}
-
-#pre-jb-view::before {
-  content: "HUD // v1.10";
-  position: absolute;
-  top: -10px;
-  left: 16px;
-  padding: 1px 8px;
-  border-radius: 4px;
-  background-color: var(--hud-bg);
-  border: 1px solid rgba(0, 245, 255, 0.5);
-  color: var(--hud-cyan);
-  font-size: 0.65rem;
-  font-weight: 800;
-  letter-spacing: 1.5px;
-}
-
-.btn {
-  display: block;
-  width: 100%;
-  padding: 1rem 1.8rem;
-  border-radius: 8px;
-  background-color: rgba(0, 245, 255, 0.09);
-  border: 1px solid var(--hud-cyan);
-  border-left: 5px solid var(--hud-cyan);
-  color: var(--hud-text);
-  font-size: 1.25rem;
-  font-weight: 800;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.16s ease, color 0.16s ease, transform 0.16s ease, box-shadow 0.16s ease;
-}
-
-.btn:hover, .btn:focus {
-  background-color: var(--hud-cyan);
-  color: #03050a;
-  box-shadow: 0 0 22px rgba(0, 245, 255, 0.55);
-  transform: translateY(-2px);
-}
-
-.btn-secondary {
-  padding: 0.85rem 1.6rem;
-  font-size: 1rem;
-  font-weight: 700;
-  letter-spacing: 0.9px;
-  background-color: rgba(254, 228, 64, 0.07);
-  border: 1px solid rgba(254, 228, 64, 0.55);
-  border-left: 5px solid var(--hud-amber);
-  color: var(--hud-muted);
-}
-
-.btn-secondary:hover, .btn-secondary:focus {
-  background-color: var(--hud-amber);
-  border-color: var(--hud-amber);
-  color: #03050a;
-  box-shadow: 0 0 20px rgba(254, 228, 64, 0.45);
-  transform: translateY(-1px);
-}
-
-.selected {
-  opacity: 1 !important;
-  pointer-events: auto !important;
-}
-
-#credits {
-  text-align: center;
-  padding: 0 14px 6px;
-  pointer-events: none;
-}
-
-#credits span {
-  display: block;
-  color: var(--hud-cyan);
-  font-size: 0.7rem;
-  font-weight: 700;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  margin-bottom: 4px;
+  background: var(--panel);
+  border: 1px solid rgba(0, 240, 25
